@@ -123,25 +123,18 @@ ABjection.Tester = function(ga, dimensionId, domain){
         return variationName;
     };
 
-
     var execute = function(experimentName, variation){
-        for (var i = 0; i < variation.length; i++) {
-            var transform = variation[i];
-
-            var elements = document.getElementsByClassName(experimentName);
-            for (var j = 0; j < elements.length; j++) {
-                abUtils.Log("Applying transform " + transform);
-
-                if (typeof(transform) == "function")
-                {
-                    transform.call(elements[j]);
-                }
-                else
-                {
-                    elements[j].innerHTML = transform;   
-                }
-            }
-        }
+		var elements = document.getElementsByClassName(experimentName);
+		for (var j = 0; j < elements.length; j++) {
+			if (typeof(variation) == "function")
+			{
+				variation.call(elements[j]);
+			}
+			else
+			{
+				elements[j].innerHTML = variation;
+			}
+		}
     };
 
     this.Experiment = function(experimentName, variations){
